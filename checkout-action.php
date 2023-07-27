@@ -66,6 +66,10 @@ function woocustom_checkout_field_update_order_meta( $order_id ) {
 	if ($_POST['woo_field']) {
         update_post_meta( $order_id, 'Woo Field', esc_attr($_POST['woo_field']));
     }
+
+    if ( ! empty( $_POST['appform_field'] ) ) {
+        update_post_meta( $order_id, '_application', $_POST['appform_field'] );
+     }
 }
 
 // Show custom value in orders table
@@ -145,14 +149,3 @@ function woocustom_appformupload() {
    }
    die;
 }
- 
-add_action( 'woocommerce_checkout_update_order_meta', 'woocustom_save_new_checkout_field' );
-   
-function woocustom_save_new_checkout_field( $order_id ) { 
-   if ( ! empty( $_POST['appform_field'] ) ) {
-      update_post_meta( $order_id, '_application', $_POST['appform_field'] );
-   }
-}
-   
-
-  
